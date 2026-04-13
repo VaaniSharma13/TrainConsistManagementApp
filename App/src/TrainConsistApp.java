@@ -26,16 +26,13 @@ public class TrainConsistApp {
         bogies.add(new Bogie("Sleeper", 80));
         bogies.add(new Bogie("AC Chair", 65));
 
-        System.out.println("Original Bogies:");
+        System.out.println("Bogies:");
         bogies.forEach(System.out::println);
 
-        Map<String, List<Bogie>> groupedBogies = bogies.stream()
-                .collect(Collectors.groupingBy(b -> b.type));
+        int totalCapacity = bogies.stream()
+                .map(b -> b.capacity)
+                .reduce(0, Integer::sum);
 
-        System.out.println("\nGrouped Bogies:");
-        groupedBogies.forEach((key, value) -> {
-            System.out.println(key + ":");
-            value.forEach(System.out::println);
-        });
+        System.out.println("\nTotal Seating Capacity: " + totalCapacity);
     }
 }
