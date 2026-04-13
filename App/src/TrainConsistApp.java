@@ -29,11 +29,13 @@ public class TrainConsistApp {
         System.out.println("Original Bogies:");
         bogies.forEach(System.out::println);
 
-        List<Bogie> filteredBogies = bogies.stream()
-                .filter(b -> b.capacity > 60)
-                .collect(Collectors.toList());
+        Map<String, List<Bogie>> groupedBogies = bogies.stream()
+                .collect(Collectors.groupingBy(b -> b.type));
 
-        System.out.println("\nFiltered Bogies (Capacity > 60):");
-        filteredBogies.forEach(System.out::println);
+        System.out.println("\nGrouped Bogies:");
+        groupedBogies.forEach((key, value) -> {
+            System.out.println(key + ":");
+            value.forEach(System.out::println);
+        });
     }
 }
